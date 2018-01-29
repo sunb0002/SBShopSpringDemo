@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  */
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(transactionManagerRef = "sbshop-txnmgr", basePackages = { "com.madoka.sunb0002.repositories" })
 @EnableTransactionManagement
 public class RepositoryConfig {
 

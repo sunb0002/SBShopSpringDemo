@@ -36,7 +36,7 @@ public class WebGlobalExceptionHandler {
 	@ResponseBody
 	public GeneralResponse handleServiceException(HttpServletRequest request, HttpServletResponse response,
 			ServiceException se) {
-		logger.error("ServiceException Occured: URL=" + request.getRequestURL(), se);
+		logger.error("ServiceException Occured: URL={}", request.getRequestURL(), se);
 		int status = se.getStatus() != null ? se.getStatus().intValue() : HttpStatus.INTERNAL_SERVER_ERROR.value();
 		response.setStatus(status);
 		return new GeneralResponse(status, null, se.getMessage());
@@ -46,7 +46,7 @@ public class WebGlobalExceptionHandler {
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	@ResponseBody
 	public GeneralResponse handleNoMappingException(HttpServletRequest request, Exception ex) {
-		logger.error("NoMappingException Occured: URL=" + request.getRequestURL(), ex);
+		logger.error("NoMappingException Occured: URL={}", request.getRequestURL(), ex);
 		return new GeneralResponse(HttpStatus.NOT_FOUND.value(), null,
 				messageSource.getMessage("response.error.request.invalid", null, null));
 	}

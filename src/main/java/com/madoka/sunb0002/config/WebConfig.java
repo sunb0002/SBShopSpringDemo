@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.madoka.sunb0002.webapi.*")
+@ComponentScan({ "com.madoka.sunb0002.webapi.*", "com.madoka.sunb0002.services.impl" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override

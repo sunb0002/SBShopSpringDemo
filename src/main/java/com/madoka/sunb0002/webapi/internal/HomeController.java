@@ -33,8 +33,8 @@ public class HomeController {
 	private String appName;
 
 	@ApiOperation(value = "allHail", notes = "Get successful message", tags = { "Internal" })
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Everything ok.", response = HomeResponse.class),
-			@ApiResponse(code = 500, message = "Unexpected Error occurred", response = HomeResponse.class) })
+	@ApiResponses(value = {
+			@ApiResponse(code = 403, message = "You'll get forbidden.", response = HomeResponse.class), })
 	@RequestMapping(value = "/json", method = RequestMethod.GET)
 	public HomeResponse allHail() {
 
