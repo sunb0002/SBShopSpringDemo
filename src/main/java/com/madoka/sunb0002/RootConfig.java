@@ -42,7 +42,7 @@ public class RootConfig {
 	@Bean("messageSource")
 	public MessageSource messageDictionary() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("classpath:messages.properties");
+		messageSource.setBasename("classpath:messages");
 		messageSource.setDefaultEncoding(ENCODING_UTF_8);
 		return messageSource;
 	}

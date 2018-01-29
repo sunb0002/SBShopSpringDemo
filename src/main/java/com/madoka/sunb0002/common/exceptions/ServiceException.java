@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.madoka.sunb0002.services;
+package com.madoka.sunb0002.common.exceptions;
 
 /**
  * @author Sun Bo
@@ -17,6 +17,10 @@ public class ServiceException extends RuntimeException {
 
 	public ServiceException() {
 		super();
+	}
+
+	public ServiceException(String message) {
+		super(message);
 	}
 
 	public ServiceException(Integer status, String message) {

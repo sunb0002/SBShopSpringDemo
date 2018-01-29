@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.madoka.sunb0002.services.ServiceException;
+import com.madoka.sunb0002.common.exceptions.ServiceException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +35,7 @@ public class HomeController {
 	@ApiOperation(value = "allHail", notes = "Get successful message", tags = { "Internal" })
 	@ApiResponses(value = {
 			@ApiResponse(code = 403, message = "You'll get forbidden.", response = HomeResponse.class), })
-	@RequestMapping(value = "/json", method = RequestMethod.GET)
+	@RequestMapping(value = "/json200", method = RequestMethod.GET)
 	public HomeResponse allHail() {
 
 		HomeResponse hr = new HomeResponse(200, appName, "All Hail Madoka");
@@ -49,7 +49,7 @@ public class HomeController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Everything ok.", response = HomeResponse.class),
 			@ApiResponse(code = 404, message = "Got forbidden.", response = HomeResponse.class),
 			@ApiResponse(code = 500, message = "Unexpected Error occurred", response = HomeResponse.class) })
-	@RequestMapping(value = "/json2", method = RequestMethod.GET)
+	@RequestMapping(value = "/json403", method = RequestMethod.GET)
 	public HomeResponse test() throws ServiceException {
 		throw new ServiceException(HttpStatus.FORBIDDEN.value(), "forbidden liao");
 	}
