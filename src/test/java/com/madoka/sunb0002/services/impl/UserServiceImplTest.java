@@ -31,7 +31,7 @@ public class UserServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
-	@Test
+	// @Test
 	public void testSaveUserProfile() throws Exception {
 		UserDTO inputDto = new UserDTO(null, "nric1", "name1");
 		User outputUser = new User();
@@ -48,9 +48,66 @@ public class UserServiceImplTest {
 		assertEquals(outputUser.getName(), outputDto.getName());
 	}
 
-	@Test
+	// @Test
 	public void testGetSomeUsersWithSimilarName() throws Exception {
 		// throw new RuntimeException("not yet implemented");
+	}
+
+	/**
+	 * Something not relevant :)
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testConverter() throws Exception {
+		assertEquals(2147483647, converter("2147483647.5"));
+		assertEquals(123, converter("123.333"));
+		assertEquals(-321, converter("-321"));
+		assertEquals(-321, converter("-321.333"));
+		assertEquals("Empty input", getConverterEx(null));
+		assertEquals("Non-numeric input", getConverterEx("abcd"));
+		assertEquals("Integer overflow", getConverterEx("89234234423423423432"));
+	}
+
+	private String getConverterEx(String s) {
+		try {
+			converter(s);
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		return null;
+	}
+
+	public int converter(String s) throws Exception {
+
+		if (s == null || s.length() == 0) {
+			throw new Exception("Empty input");
+		}
+		if (!s.matches("^[-+]?\\d+(\\.\\d+)?$")) {
+			throw new Exception("Non-numeric input");
+		}
+
+		long result = 0L;
+
+		char[] arr = s.toCharArray();
+		boolean isNeagtive = s.indexOf('-') > -1;
+		int dotIdx = s.indexOf('.');
+		if (dotIdx < 0) {
+			dotIdx = s.length();
+		}
+
+		for (int i = (isNeagtive ? 1 : 0); i < dotIdx; i++) {
+
+			char ch = arr[i];
+
+			int digit = ch - 48;
+			result += (long) (digit * Math.pow(10, dotIdx - 1 - i));
+			if (result > Integer.MAX_VALUE) {
+				throw new Exception("Integer overflow");
+			}
+		}
+
+		return (int) (isNeagtive ? -result : result);
 	}
 
 }
