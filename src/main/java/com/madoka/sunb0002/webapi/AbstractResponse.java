@@ -3,6 +3,8 @@
  */
 package com.madoka.sunb0002.webapi;
 
+import org.springframework.http.HttpStatus;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,6 +31,12 @@ public abstract class AbstractResponse<DataType> {
 
 	public AbstractResponse() {
 		super();
+	}
+
+	public AbstractResponse(DataType data) {
+		super();
+		this.status = HttpStatus.OK.value();
+		this.data = data;
 	}
 
 	public AbstractResponse(Integer status, DataType data, String msg) {

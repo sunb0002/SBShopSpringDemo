@@ -54,8 +54,4 @@ public class HomeController {
 		throw new ServiceException(HttpStatus.FORBIDDEN.value(), "forbidden liao");
 	}
 
-	// @RequestMapping(value = "/**")
-	// public HomeResponse test2() throws NoHandlerFoundException {
-	// throw new NoHandlerFoundException(null, null, null);
-	// }
 }
