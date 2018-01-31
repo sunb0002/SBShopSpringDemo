@@ -81,6 +81,20 @@ public class ProfileController {
 		}
 		return new ProfileResponseUserList(users);
 	}
+	
+	@ApiOperation(value = "getAllUsers", notes = "Get all users", tags = { "Profile" })
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Users are found.", response = ProfileResponseUserList.class),
+			@ApiResponse(code = 404, message = "Users are not found.", response = ProfileResponseUserList.class),
+			@ApiResponse(code = 500, message = "Unexpected Error occurred", response = ProfileResponseUserList.class) })
+	@RequestMapping(value = "/allusers", method = RequestMethod.GET)
+	public ProfileResponseUserList getAllUsers() throws ServiceException {
+		List<User> users = userRepo.findAll();
+		if (Validators.isEmpty(users)) {
+			throw new ServiceException(HttpStatus.NOT_FOUND.value(), "No magical girl(s) in database.");
+		}
+		return new ProfileResponseUserList(dtoParserSvc.parseUsers(users));
+	}
 
 	@ApiOperation(value = "saveUserProfile", notes = "Create or update user profile", tags = { "Profile" })
 	@ApiResponses(value = {
