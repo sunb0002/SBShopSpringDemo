@@ -32,7 +32,7 @@ public class User extends BaseEntity {
 	@Column(length = 9, nullable = false, unique = true)
 	private String nric;
 
-	@Column(length = 101, nullable = false)
+	@Column(length = 50, nullable = false)
 	private String name;
 
 	public Long getUserId() {
