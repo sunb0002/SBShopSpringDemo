@@ -9,11 +9,14 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.madoka.sunb0002.common.dtos.UserDTO;
 import com.madoka.sunb0002.common.exceptions.ServiceException;
+import com.madoka.sunb0002.config.Constants.LocalCache;
 import com.madoka.sunb0002.repositories.UserRepository;
 import com.madoka.sunb0002.repositories.entities.User;
 import com.madoka.sunb0002.services.DtoParserService;
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(value = "sbshop-txnmgr", readOnly = true)
+	@Cacheable(LocalCache.CACHE1)
 	public List<UserDTO> getSomeUsersWithSimilarName(String name) {
 		LOGGER.info("Service is searching users with name like: {}", name);
 		return dtoParserSvc.parseUsers(userRepo.findNricByNameLikeUsingQuery(name));
@@ -43,6 +47,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional("sbshop-txnmgr")
+	@CachePut(cacheNames = LocalCache.CACHE1, key = "#userDto.name")
 	public UserDTO saveUserProfile(UserDTO userDto) throws ServiceException {
 
 		User u = new User();

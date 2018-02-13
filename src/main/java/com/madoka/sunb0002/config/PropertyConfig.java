@@ -11,7 +11,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  */
 @Configuration
 @PropertySource("classpath:app.properties")
-public class PropertyConfig {
+public class PropertyConfig { // NOSONAR
+
+	// Unable to create bean if I put private constructor as Sonar instructs
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
