@@ -17,10 +17,11 @@ public class PropertyConfig { // NOSONAR
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-		PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
-		pspc.setIgnoreResourceNotFound(false);
-		pspc.setIgnoreUnresolvablePlaceholders(false);
-		return pspc;
+		PropertySourcesPlaceholderConfigurer c = new PropertySourcesPlaceholderConfigurer();
+		c.setNullValue("");
+		c.setIgnoreResourceNotFound(false);
+		c.setIgnoreUnresolvablePlaceholders(false);
+		return c;
 	}
 
 }
