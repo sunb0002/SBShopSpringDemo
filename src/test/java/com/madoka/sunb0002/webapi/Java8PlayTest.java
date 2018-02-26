@@ -12,10 +12,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -255,6 +257,28 @@ public class Java8PlayTest {
 		// }
 
 		logger.info(prefix + ":  " + mid, objects);
+	}
+
+	/**
+	 * Note: Create stream with primitive types, without using List.stream().
+	 * 
+	 * @param nums
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private boolean checkContainsDuplicate(int[] nums) {
+
+		// Integer[] objArr =
+		// Arrays.stream(nums).boxed().toArray(Integer[]::new);
+		// List<Integer> objList =
+		// Arrays.stream(nums).boxed().collect(Collectors.toList());
+
+		Set<Integer> seen = new HashSet<>();
+		return Arrays.stream(nums).anyMatch(num -> !seen.add(num));
+
+		// return Arrays.stream(nums).distinct().toArray().length !=
+		// nums.length;
+		// return Arrays.equals(distinctArr, originalArr);
 	}
 
 }
