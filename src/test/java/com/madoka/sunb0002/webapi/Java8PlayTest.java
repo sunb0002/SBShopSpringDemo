@@ -281,6 +281,27 @@ public class Java8PlayTest {
 		// return Arrays.equals(distinctArr, originalArr);
 	}
 
+	/**
+	 * Check Palindrome with Stream
+	 * 
+	 * @param s
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private boolean isPalindrome(String s) {
+		String r = reverseString(s);
+		return Arrays.equals(convertStringToIntArray(s), convertStringToIntArray(r));
+	}
+
+	private int[] convertStringToIntArray(String s) {
+		return s.chars().filter(c -> Character.isLetterOrDigit(c)).toArray();
+		// Or hello.chars().mapToObj(i -> (char)i)
+
+		// How to reverse sort int[] nums:
+		// Integer[] arr = IntStream.of(nums).boxed().toArray(Integer[]::new);
+		// Arrays.sort(arr, Collections.reverseOrder());
+	}
+
 }
 
 @FunctionalInterface
