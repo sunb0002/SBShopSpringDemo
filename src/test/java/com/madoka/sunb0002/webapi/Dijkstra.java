@@ -68,7 +68,7 @@ public class Dijkstra {
 
 		// Distance of source vertex from itself is always 0
 		minDistances[src] = 0;
-		minParents[src] = 0;
+		minParents[src] = src;
 
 		// Find shortest path for all vertices by repeating relaxation for V-1 times
 		for (int count = 0; count < V - 1; count++) {
